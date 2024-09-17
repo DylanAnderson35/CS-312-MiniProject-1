@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>Blog Web Application</title>
+    <style>
+        body 
+        { 
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #96b9ed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+        }
+        .container{
+            background-color: #96b9ed;
+            padding:20px;
+            border: 1px solid black;
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+        }
+        .btn{
+            display:block;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: rgb(200, 200, 200);
+            color: black;
+            border: 1px solid black;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 50%
+        }
+        .btn:hover{
+            background-color: #ffffff;
+        }
+        .input-field{
+            display: block;
+            margin: 20px 0;
+            padding: 20px;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .output{
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgb(200, 200, 200);
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BLOG WEB APPLICATION</h1>
+        <button class="btn" id="createBlogBtn">Create Blog Post</button>
+        <div id="createBlogPost"></div>
+        <div id="output"></div>
+
+        <button class="btn" id="viewBlogBtn">View Blog Post</button>
+        <button class="btn" id="editBlogBtn">Edit Blog Post</button>
+        <button class="btn" id="deleteBlogBtn">Delete Blog Post</button>
+    </div>
+
+    <script>
+        var storedTitle;
+        var storedBlog;
+
+        const createBlogBtn = document.getElementById('createBlogBtn');
+        const createBlogPost = document.getElementById('createBlogPost');
+        const output = document.getElementById('output');
+
+        createBlogBtn.addEventListener('click', function(){
+            if (!document.getElementById('blogPostTitle')){
+                const titleInput = document.createElement('input');
+                titleInput.setAttribute('type', 'text');
+                titleInput.setAttribute('placeholder', 'Enter blog post title');
+                titleInput.setAttribute('id', 'blogPostTitle');
+                titleInput.classList.add('input-field');
+
+                const bodyInput = document.createElement('textarea');
+                bodyInput.setAttribute('placeholder', 'Enter blog content');
+                bodyInput.setAttribute('id', 'blogPostBody');
+                bodyInput.classList.add('input-field');
+                bodyInput.setAttribute('rows', '5');
+
+                const uploadBtn = document.createElement('button');
+                uploadBtn.textContent = 'Upload Post';
+                uploadBtn.classList.add('btn');
+
+                createBlogPost.appendChild(titleInput);
+                createBlogPost.appendChild(bodyInput);
+                createBlogPost.appendChild(uploadBtn);
+
+                uploadBtn.addEventListener('click', function() {
+                    const blogPostTitle = document.getElementById('blogPostTitle').value;
+                    const blogPostBody = document.getElementById('blogPostBody').value;
+
+                    storedTitle = blogPostTitle;
+                    storedBlog = blogPostBody;
+                });
+            }
+        });
+
+        viewBlogBtn.addEventListener('click',function(){
+            output.innerHTML`<h3>${storedTitle}</h3><p>${storedBlog}</p>`;
+        });
+    </script>
+</body>
+</html>
